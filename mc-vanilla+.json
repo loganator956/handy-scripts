@@ -1,12 +1,26 @@
 [
     {
-        "Label": "Numeral Ping",
-        "VersionID": "W2er4vCn",
-        "Source": "modrinth"
-    },
-    {
-        "Label": "NoStrip",
-        "VersionID": "2Rx3YPcq",
-        "Source": "modrinth"
+        "Name": "Quilt Vanilla+",
+        "Launcher": "https://quiltmc.org/api/v1/download-latest-installer/windows-x86_64",
+        "Mods": [
+            {
+                "Label": "Numeral Ping",
+                "VersionID": "W2er4vCn",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/numeral-ping/version/1.2.1"
+            },
+            {
+                "Label": "NoStrip",
+                "VersionID": "2Rx3YPcq",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/no-strip/version/1.2.3"
+            },
+            {
+                "Label": "Screenshot to Clipboard",
+                "VersionID": "rObP72r1",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/screenshot-to-clipboard/version/1.0.9+fabric"
+            }
+        ]
     }
 ]
