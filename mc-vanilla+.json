@@ -20,6 +20,11 @@
                 "VersionID": "rObP72r1",
                 "Source": "modrinth",
                 "URL": "https://modrinth.com/mod/screenshot-to-clipboard/version/1.0.9+fabric"
+            },
+            {
+                "Label": "WorldEdit",
+                "Source": "curseforge",
+                "URL": "https://mediafilez.forgecdn.net/files/4586/218/worldedit-mod-7.2.15.jar"
             }
         ]
     }
