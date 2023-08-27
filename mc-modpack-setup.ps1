@@ -90,8 +90,32 @@ function Create-LauncherProfile {
     $ProfFile = "$Env:APPDATA\.minecraft\launcher_profiles.json"
     $data = Get-Content -Path $ProfFile | ConvertFrom-Json
     $profiles = $data.profiles
-    # TODO: Use Get-Member to find out if the member exists already; and modify it
-    $profiles | Add-Member -MemberType NoteProperty -Name $ID -Value $MCProfile
+    $found = $false
+    foreach ($member in ($profiles | Get-Member)) {
+        if ($member.Name -eq $ID) {
+            $found = $true
+            break
+        }
+    }
+
+    # $MCProfile.gameDir = $MCProfile.gameDir.Replace("//REPLACEWITHDOCS", [Environment]::GetFolderPath("MyDocuments"))
+
+    if ($found -eq $true) {
+        $profile = $profiles.$ID
+        $profile.name = $MCProfile.name
+        $profile.type = $MCProfile.type
+        $profile.created = $MCProfile.created
+        $profile.lastUsed = $MCProfile.lastUsed
+        $profile.icon = $MCProfile.icon
+        $profile.lastVersionId = $MCProfile.lastVersionId
+        $profile.gameDir = $MCProfile.gameDir
+    }
+    else {
+        $profiles | Add-Member -MemberType NoteProperty -Name $ID -Value $MCProfile
+    }
+    $data.profiles = $profiles
+    $s = $data | ConvertTo-Json 
+    $s | Set-Content -Path $ProfFile
 }
 
 $r = Read-Host -Prompt "Have you ran minecraft launcher and signed in? [y/N]"
@@ -100,9 +124,16 @@ if ($r -ne "y") {
 }
 
 $ApiUserAgent = "loganator956/handy-scripts"
-$DestinationStorage = $args[1]
+#TODO: Change destination storage to the path in json file
 $SourceList = Invoke-WebRequest -Uri $args[0] | ConvertFrom-Json
-
+$SourceList[0].MinecraftProfile[0].gameDir = $SourceList[0].MinecraftProfile[0].gameDir.Replace("//REPLACEWITHDOCS", [Environment]::GetFolderPath("MyDocuments"))
+$DestinationStorage = $SourceList[0].MinecraftProfile[0].gameDir
+if ((Test-Path -Path $MCProfile.gameDir) -eq $false) {
+    New-Item -Path $MCProfile.gameDir -ItemType Directory
+}
+if ((Test-Path -Path "$DestinationStorage\mods") -eq $false) {
+    New-Item -Path "$DestinationStorage\mods" -ItemType Directory
+}
 $JavaPath = "C:\Program Files\Eclipse Adoptium\jre-20.0.1.9-hotspot\bin\java.exe"
 
 $InstalledModrinthProjectsList = New-Object Collections.Generic.List[string]
