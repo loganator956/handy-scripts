@@ -37,6 +37,142 @@
                 "Label": "WorldEdit",
                 "Source": "curseforge",
                 "URL": "https://mediafilez.forgecdn.net/files/4586/218/worldedit-mod-7.2.15.jar"
+            },
+            {
+                "Label": "Entity Culling",
+                "VersionID": "d20sUcYn",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/entityculling/version/d20sUcYn"
+            },
+            {
+                "Label": "FerriteCore",
+                "VersionID": "FCnCG6PS",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/ferrite-core/version/FCnCG6PS"
+            },
+            {
+                "Label": "Indium",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/indium/version/1.0.25+mc1.20.1",
+                "VersionID": "6UQwWURe"
+            },
+            {
+                "Label": "Continuity",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/continuity/version/3.0.0-beta.3+1.20.1",
+                "VersionID": "xy2co4Rh"
+            },
+            {
+                "Label": "Farsight (Fabric)",
+                "Source": "curseforge",
+                "URL": "https://mediafilez.forgecdn.net/files/4689/58/farsight-fabric-1.20.1-4.1.jar"
+            },
+            {
+                "Label": "Iris Shaders",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/iris/version/1.6.8+1.20.1",
+                "VersionID": "pVNPPrMY"
+            },
+            {
+                "Label": "LambdaBetterGrass",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/lambdabettergrass/version/1.5.2+1.20.1",
+                "VersionID": "Fhyj2P7Q"
+            },
+            {
+                "Label": "Mod Menu",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/modmenu/version/7.2.1",
+                "VersionID": "eTCL1uh8"
+            },
+            {
+                "Label": "Roughly Enough Items",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/rei/version/12.0.645+fabric",
+                "VersionID": "kq4TOe4i"
+            },
+            {
+                "Label": "Sodium",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/sodium/version/mc1.20.1-0.5.2",
+                "VersionID": "6SSPmLc9"
+            },
+            {
+                "Label": "Lithium",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/lithium/version/mc1.20.1-0.11.2",
+                "VersionID": "ZSNsJrPI"
+            },
+            {
+                "Label": "BetterF3",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/betterf3/version/7.0.1",
+                "VersionID": "FtJ0KSLo"
+            },
+            {
+                "Label": "DashLoader",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/dashloader/version/5.0.0-beta.2+1.20.0",
+                "VersionID": "wgtrj8HS"
+            },
+            {
+                "Label": "WTHIT",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/wthit/version/quilt-8.3.1",
+                "VersionID": "KEi8jfRf"
+            },
+            {
+                "Label": "FallingTree",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/fallingtree/version/1.20.1-4.3.0",
+                "VersionID": "kPSbFSaC"
+            },
+            {
+                "Label": "Reese's Sodium Options",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/reeses-sodium-options/version/mc1.20.1-1.6.5",
+                "VersionID": "hCsMUZLa"
+            },
+            {
+                "Label": "Fabrishot",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/fabrishot/version/1.10.0",
+                "VersionID": "fLwacDtJ"
+            },
+            {
+                "Label": "Simple Discord RPC",
+                "Source": "curseforge",
+                "URL": "https://mediafilez.forgecdn.net/files/4578/494/simple-rpc-fabric-1.20-3.2.2.jar"
+            },
+            {
+                "Label": "Borderless Mining",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/borderless-mining/version/1.1.8+1.20.1",
+                "VersionID": "lhrW53q7"
+            },
+            {
+                "Label": "Visuality",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/visuality/version/0.7.0+1.20",
+                "VersionID": "BipSJ05N"
+            },
+            {
+                "Label": "Animatica",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/animatica/version/0.6+1.20",
+                "VersionID": "uNgEPb10"
+            },
+            {
+                "Label": "Universal Graves",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/universal-graves/version/3.0.0-pre.1+1.20.1",
+                "VersionID": "RqVbvts1"
+            },
+            {
+                "Label": "JourneyMap",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/journeymap/version/1.20.1-5.9.12-fabric",
+                "VersionID": "NXNhbImz"
             }
         ]
     }
