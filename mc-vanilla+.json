@@ -1,7 +1,7 @@
 [
     {
         "Name": "Quilt Vanilla+",
-        "ModLoader": "https://quiltmc.org/api/v1/download-latest-installer/windows-x86_64",
+        "ModLoader": "https://maven.quiltmc.org/repository/release/org/quiltmc/quilt-installer/0.8.2/quilt-installer-0.8.2.jar",
         "Mods": [
             {
                 "Label": "Numeral Ping",
