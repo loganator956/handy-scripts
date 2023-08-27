@@ -1,8 +1,8 @@
 [
     {
-        "Name": "Quilt 1.20.1",
+        "Name": "Quilt Vanilla+",
         "ModLoader": "https://maven.quiltmc.org/repository/release/org/quiltmc/quilt-installer/0.8.2/quilt-installer-0.8.2.jar",
-        "ProfileUUID": "c87bf0555c6dddc6464e9f18b8e8f425",
+        "ProfileUUID": "Quilt 1.20.1",
         "MinecraftProfile": [
             {
                 "name": "Quilt Vanilla+ 1.20.1",
