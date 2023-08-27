@@ -49,14 +49,15 @@ function Get-Project {
 
 function Install-ModLoader {
     param (
-        $URL
+        $URL,
+        $Arguments
     )
     #TODO: Check if modloader version is already installed or not
     Write-Host "Downloading "$URL
     Install-Java
     $fileName = Split-Path $URL -Leaf
     Invoke-WebRequest -Uri $URL -OutFile $fileName
-    Start-Process -FilePath $JavaPath -Wait -ArgumentList "-jar $fileName"
+    Start-Process -FilePath $JavaPath -Wait -ArgumentList "-jar $fileName $Arguments"
     Remove-Item -Path $fileName
 }
 
@@ -137,7 +138,7 @@ $JavaPath = "C:\Program Files\Eclipse Adoptium\jre-20.0.1.9-hotspot\bin\java.exe
 
 $InstalledModrinthProjectsList = New-Object Collections.Generic.List[string]
 
-# Install-ModLoader -URL $SourceList.ModLoader
+Install-ModLoader -URL $SourceList.ModLoader $SourceList.ModLoaderInstallArgs
 
 Disable-Mods -ModDir "$DestinationStorage\mods"
 
