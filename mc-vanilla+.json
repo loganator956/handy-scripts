@@ -1,0 +1,43 @@
+[
+    {
+        "Name": "Quilt Vanilla+",
+        "ModLoader": "https://maven.quiltmc.org/repository/release/org/quiltmc/quilt-installer/0.8.2/quilt-installer-0.8.2.jar",
+        "ProfileUUID": "c87bf0555c6dddc6464e9f18b8e8f425",
+        "MinecraftProfile": [
+            {
+                "name": "Quilt Vanilla+ 1.20.1",
+                "type": "custom",
+                "created": "2023-08-27T21:17:52.611Z",
+                "lastUsed": "2023-08-27T21:17:52.611Z",
+                "icon": "Furnace",
+                "lastVersionId": "quilt-loader-0.20.1-1.20.1",
+                "gameDir": "//REPLACEWITHDOCS\\My Games\\Minecraft\\qv+1.20.1"
+            }
+        ],
+        "Mods": [
+            {
+                "Label": "Numeral Ping",
+                "VersionID": "W2er4vCn",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/numeral-ping/version/1.2.1"
+            },
+            {
+                "Label": "NoStrip",
+                "VersionID": "2Rx3YPcq",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/no-strip/version/1.2.3"
+            },
+            {
+                "Label": "Screenshot to Clipboard",
+                "VersionID": "rObP72r1",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/screenshot-to-clipboard/version/1.0.9+fabric"
+            },
+            {
+                "Label": "WorldEdit",
+                "Source": "curseforge",
+                "URL": "https://mediafilez.forgecdn.net/files/4586/218/worldedit-mod-7.2.15.jar"
+            }
+        ]
+    }
+]

@@ -1,0 +1,18 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "PowerShell: Launch Current File",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${file}",
+            "args": [
+                "https://raw.githubusercontent.com/loganator956/handy-scripts/20230826/mc-vanilla%2B.json",
+                "'C:\\Users\\coolguy\\Documents\\My Games\\Minecraft\\Test'"
+            ]
+        }
+    ]
+}
