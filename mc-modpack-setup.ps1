@@ -2,10 +2,16 @@ function Install-ModrinthVersion {
     param (
         $VersionID
     )
+    
     $response = Invoke-WebRequest -Uri https://api.modrinth.com/v2/version/$VersionID -Headers @{"User-Agent" = $ApiUserAgent } -Method Get
     $content = $response.Content | ConvertFrom-Json
     # Get file
+    if ($InstalledModrinthProjectsList.Contains($content.project_id)) {
+        Write-Host "Already installed "$content.project_id
+        return
+    }
     $project = Get-Project -ProjectID $content.project_id
+    $InstalledModrinthProjectsList.Add($content.project_id)
     $title = $project.title
     $fileName = Split-Path $content.files[0].url -Leaf
     Write-Host "Downloading $title to $fileName"
@@ -60,6 +66,34 @@ function Install-Java {
     }
 }
 
+function Disable-Mods {
+    param (
+        $ModDir
+    )
+    foreach ($child in (Get-ChildItem -Path $ModDir)) {
+        if ($child.FullName.EndsWith(".DISABLED")) {
+            continue
+        }
+        $newName = $child.FullName + ".DISABLED"
+        if (Test-Path -Path $newName) {
+            Remove-Item -Path $newName
+        }
+        $child.MoveTo($newName)
+    }
+}
+
+function Create-LauncherProfile {
+    param (
+        $MCProfile,
+        $ID
+    )
+    $ProfFile = "$Env:APPDATA\.minecraft\launcher_profiles.json"
+    $data = Get-Content -Path $ProfFile | ConvertFrom-Json
+    $profiles = $data.profiles
+    # TODO: Use Get-Member to find out if the member exists already; and modify it
+    $profiles | Add-Member -MemberType NoteProperty -Name $ID -Value $MCProfile
+}
+
 $r = Read-Host -Prompt "Have you ran minecraft launcher and signed in? [y/N]"
 if ($r -ne "y") {
     exit
@@ -71,7 +105,11 @@ $SourceList = Invoke-WebRequest -Uri $args[0] | ConvertFrom-Json
 
 $JavaPath = "C:\Program Files\Eclipse Adoptium\jre-20.0.1.9-hotspot\bin\java.exe"
 
-Install-ModLoader -URL $SourceList.ModLoader
+$InstalledModrinthProjectsList = New-Object Collections.Generic.List[string]
+
+# Install-ModLoader -URL $SourceList.ModLoader
+
+Disable-Mods -ModDir "$DestinationStorage\mods"
 
 foreach ($source in $SourceList.Mods) {
     if ($Source.Source -eq "modrinth") {
@@ -81,3 +119,4 @@ foreach ($source in $SourceList.Mods) {
         Install-Curseforge -url $source.URL
     }
 }
+Create-LauncherProfile -MCProfile $SourceList.MinecraftProfile[0] -ID $SourceList.ProfileUUID
