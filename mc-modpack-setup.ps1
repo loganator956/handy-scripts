@@ -124,7 +124,6 @@ if ($r -ne "y") {
 }
 
 $ApiUserAgent = "loganator956/handy-scripts"
-#TODO: Change destination storage to the path in json file
 $SourceList = Invoke-WebRequest -Uri $args[0] | ConvertFrom-Json
 $SourceList[0].MinecraftProfile[0].gameDir = $SourceList[0].MinecraftProfile[0].gameDir.Replace("//REPLACEWITHDOCS", [Environment]::GetFolderPath("MyDocuments"))
 $DestinationStorage = $SourceList[0].MinecraftProfile[0].gameDir
