@@ -10,8 +10,7 @@
             "request": "launch",
             "script": "${file}",
             "args": [
-                "https://raw.githubusercontent.com/loganator956/handy-scripts/20230826/mc-vanilla%2B.json",
-                "'C:\\Users\\coolguy\\Documents\\My Games\\Minecraft\\Test'"
+                "https://raw.githubusercontent.com/loganator956/handy-scripts/master/mc-vanilla%2B.json"
             ]
         }
     ]
