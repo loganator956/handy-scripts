@@ -13,7 +13,7 @@ mc-modpack-setup.ps1 [url to json file]
 Or you can run it using `Invoke-Expression`:
 
 ```Powershell
-$MC_JSON_PATH = [URL to json];iwr https://raw.githubusercontent.com/loganator956/mc-autosetup/read-var/mc-modpack-setup.ps1 | iex
+$MC_JSON_PATH = [URL to json];iwr https://raw.githubusercontent.com/loganator956/mc-autosetup/master/mc-modpack-setup.ps1 | iex
 ```
 
 **REPLACE `URL to json` WITH THE ACTUAL URL**
