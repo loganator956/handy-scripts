@@ -3,6 +3,8 @@ function Install-ModrinthVersion {
         $VersionID,
         $Blacklist
     )
+
+    Write-Host "Installing modrinth" $VersionID
     
     $response = Invoke-WebRequest -Uri https://api.modrinth.com/v2/version/$VersionID -Headers @{"User-Agent" = $ApiUserAgent } -Method Get
     $content = $response.Content | ConvertFrom-Json
@@ -27,7 +29,12 @@ function Install-ModrinthVersion {
 
     # Process Dependencies
     foreach ($Dependency in $content.dependencies) {
-        Install-ModrinthVersion -VersionID $Dependency.version_id -Blacklist $Blacklist
+        Write-Host "Installing modrinth dependency" $Dependency
+        if ($Dependency.version_id -eq $null) {
+            Write-Warning -Message ($Dependency.project_id + " has no version_id set. Manually add this dependency to the json file")
+            continue
+        }
+        Install-ModrinthVersion -VersionID $Dependency.version_id
     }
 }
 
@@ -35,6 +42,7 @@ function Install-Curseforge {
     param (
         $url
     )
+    Write-Host "Installing curseforge" $url
     
     $fileName = Split-Path $url -Leaf
     if ((Test-Path -Path "$DestinationStorage\mods") -eq $false) {
@@ -107,14 +115,14 @@ function Create-LauncherProfile {
     # $MCProfile.gameDir = $MCProfile.gameDir.Replace("//REPLACEWITHDOCS", [Environment]::GetFolderPath("MyDocuments"))
 
     if ($found -eq $true) {
-        $profile = $profiles.$ID
-        $profile.name = $MCProfile.name
-        $profile.type = $MCProfile.type
-        $profile.created = $MCProfile.created
-        $profile.lastUsed = $MCProfile.lastUsed
-        $profile.icon = $MCProfile.icon
-        $profile.lastVersionId = $MCProfile.lastVersionId
-        $profile.gameDir = $MCProfile.gameDir
+        $prof = $profiles.$ID
+        $prof.name = $MCProfile.name
+        $prof.type = $MCProfile.type
+        $prof.created = $MCProfile.created
+        $prof.lastUsed = $MCProfile.lastUsed
+        $prof.icon = $MCProfile.icon
+        $prof.lastVersionId = $MCProfile.lastVersionId
+        $prof.gameDir = $MCProfile.gameDir
     }
     else {
         $profiles | Add-Member -MemberType NoteProperty -Name $ID -Value $MCProfile
@@ -133,8 +141,8 @@ $ApiUserAgent = "loganator956/handy-scripts"
 $SourceList = Invoke-WebRequest -Uri $args[0] | ConvertFrom-Json
 $SourceList[0].MinecraftProfile[0].gameDir = $SourceList[0].MinecraftProfile[0].gameDir.Replace("//REPLACEWITHDOCS", [Environment]::GetFolderPath("MyDocuments"))
 $DestinationStorage = $SourceList[0].MinecraftProfile[0].gameDir
-if ((Test-Path -Path $MCProfile.gameDir) -eq $false) {
-    New-Item -Path $MCProfile.gameDir -ItemType Directory
+if ((Test-Path -Path $DestinationStorage) -eq $false) {
+    New-Item -Path $DestinationStorage -ItemType Directory
 }
 if ((Test-Path -Path "$DestinationStorage\mods") -eq $false) {
     New-Item -Path "$DestinationStorage\mods" -ItemType Directory
@@ -148,10 +156,10 @@ Install-ModLoader -URL $SourceList.ModLoader $SourceList.ModLoaderInstallArgs
 Disable-Mods -ModDir "$DestinationStorage\mods"
 
 foreach ($source in $SourceList.Mods) {
-    if ($Source.Source -eq "modrinth") {
-        Install-ModrinthVersion -VersionID $Source.VersionID -Blacklist $SourceList.ModBlacklist
+    if ($source.Source -eq "modrinth") {
+        Install-ModrinthVersion -VersionID $source.VersionID -Blacklist $SourceList.ModBlacklist
     }
-    elseif ($Source.Source -eq "curseforge") {
+    elseif ($source.Source -eq "curseforge") {
         Install-Curseforge -url $source.URL
     }
 }
