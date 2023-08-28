@@ -132,13 +132,21 @@ function Create-LauncherProfile {
     $s | Set-Content -Path $ProfFile
 }
 
+$jsonPath = $args[0]
+if ($jsonPath -eq $null){
+    $jsonPath = Read-Host -Prompt "JsonPath not provided, please enter a URL"
+}
+
 $r = Read-Host -Prompt "Have you ran minecraft launcher and signed in? [y/N]"
 if ($r -ne "y") {
     exit
 }
 
 $ApiUserAgent = "loganator956/handy-scripts"
-$SourceList = Invoke-WebRequest -Uri $args[0] | ConvertFrom-Json
+
+
+
+$SourceList = Invoke-WebRequest -Uri $jsonPath | ConvertFrom-Json
 $SourceList[0].MinecraftProfile[0].gameDir = $SourceList[0].MinecraftProfile[0].gameDir.Replace("//REPLACEWITHDOCS", [Environment]::GetFolderPath("MyDocuments"))
 $DestinationStorage = $SourceList[0].MinecraftProfile[0].gameDir
 if ((Test-Path -Path $DestinationStorage) -eq $false) {
