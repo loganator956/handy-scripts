@@ -133,7 +133,10 @@ function Create-LauncherProfile {
 }
 
 $jsonPath = $args[0]
-if ($jsonPath -eq $null){
+if ($jsonPath -eq $null) {
+    $jsonPath = $MC_JSON_PATH
+}
+if ($jsonPath -eq $null) {
     $jsonPath = Read-Host -Prompt "JsonPath not provided, please enter a URL"
 }
 

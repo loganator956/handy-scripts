@@ -13,10 +13,14 @@ mc-modpack-setup.ps1 [url to json file]
 Or you can run it using `Invoke-Expression`:
 
 ```Powershell
-iwr https://raw.githubusercontent.com/loganator956/mc-autosetup/master/mc-modpack-setup.ps1 | iex
+$MC_JSON_PATH = [URL to json];iwr https://raw.githubusercontent.com/loganator956/mc-autosetup/master/mc-modpack-setup.ps1 | iex
 ```
 
-Currently, it will download the file using `Invoke-WebRequest` and so will not be able to install from local files. 
+**REPLACE `URL to json` WITH THE ACTUAL URL**
+
+If you do not provide an argument nor a `MC_JSON_PATH` variable value, you will be prompted to input the URL.
+
+Currently, it will download the modpack json file using `Invoke-WebRequest` and so will not be able to install from local files. 
 
 ## Modpack Json
 
