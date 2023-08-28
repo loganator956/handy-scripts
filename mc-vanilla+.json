@@ -111,6 +111,11 @@
                 "VersionID": "xy2co4Rh"
             },
             {
+                "Label": "Cupboard",
+                "Source": "curseforge",
+                "URL": "https://mediafilez.forgecdn.net/files/4714/94/cupboard-fabric-1.20.1-1.8.jar"
+            },
+            {
                 "Label": "Farsight (Fabric)",
                 "Source": "curseforge",
                 "URL": "https://mediafilez.forgecdn.net/files/4689/58/farsight-fabric-1.20.1-4.1.jar"
@@ -183,8 +188,9 @@
             },
             {
                 "Label": "Simple Discord RPC",
-                "Source": "curseforge",
-                "URL": "https://mediafilez.forgecdn.net/files/4578/494/simple-rpc-fabric-1.20-3.2.2.jar"
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/simple-discord-rpc/version/1.20-3.2.2",
+                "VersionID": "28C8ubz1"
             },
             {
                 "Label": "Borderless Mining",
