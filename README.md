@@ -2,6 +2,7 @@
 
 ![PowerShell](https://img.shields.io/badge/PowerShell-%235391FE.svg?style=for-the-badge&logo=powershell&logoColor=white)
 ![License](https://img.shields.io/github/license/loganator956/mc-autosetup?style=for-the-badge)
+[![GitHub release (with filter)](https://img.shields.io/github/v/release/loganator956/mc-autosetup?style=for-the-badge)](https://github.com/loganator956/mc-autosetup/releases/latest)
 
 This is a small powershell script that will automatically setup custom unofficial modpacks and generate/update minecraft launcher profiles.
 
