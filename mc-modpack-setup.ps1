@@ -38,6 +38,31 @@ function Install-ModrinthVersion {
     }
 }
 
+function Install-ModrinthShader {
+    param (
+        $VersionID
+    )
+
+    Write-Host "Installing modrinth shader" $VersionID
+    
+    $response = Invoke-WebRequest -Uri https://api.modrinth.com/v2/version/$VersionID -Headers @{"User-Agent" = $ApiUserAgent } -Method Get
+    $content = $response.Content | ConvertFrom-Json
+    # Get file
+    if ($InstalledModrinthProjectsList.Contains($content.project_id)) {
+        Write-Host "Already installed "$content.project_id
+        return
+    }
+    $project = Get-Project -ProjectID $content.project_id
+    $InstalledModrinthProjectsList.Add($content.project_id)
+    $title = $project.title
+    $fileName = Split-Path $content.files[0].url -Leaf
+    Write-Host "Downloading $title to $fileName"
+    if ((Test-Path -Path "$DestinationStorage\shaderpacks") -eq $false) {
+        New-Item -Path "$DestinationStorage\shaderpacks" -ItemType Directory
+    }
+    Invoke-WebRequest -Uri $content.files[0].url -OutFile "$DestinationStorage\shaderpacks\$fileName"
+}
+
 function Install-Curseforge {
     param (
         $url
@@ -158,6 +183,9 @@ if ((Test-Path -Path $DestinationStorage) -eq $false) {
 if ((Test-Path -Path "$DestinationStorage\mods") -eq $false) {
     New-Item -Path "$DestinationStorage\mods" -ItemType Directory
 }
+if ((Test-Path -Path "$DestinationStorage\shaderpacks") -eq $false) {
+    New-Item -Path "$DestinationStorage\shaderpacks" -ItemType Directory
+}
 $JavaPath = "C:\Program Files\Eclipse Adoptium\jre-20.0.1.9-hotspot\bin\java.exe"
 
 $InstalledModrinthProjectsList = New-Object Collections.Generic.List[string]
@@ -172,6 +200,12 @@ foreach ($source in $SourceList.Mods) {
     }
     elseif ($source.Source -eq "curseforge") {
         Install-Curseforge -url $source.URL
+    }
+}
+
+foreach ($shader in $SourceList.Shaders){
+    if ($shader.Source -eq "modrinth") {
+        Install-ModrinthShader -VersionID $shader.VersionID
     }
 }
 Create-LauncherProfile -MCProfile $SourceList.MinecraftProfile[0] -ID $SourceList.ProfileUUID
