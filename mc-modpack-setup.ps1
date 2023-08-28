@@ -128,8 +128,8 @@ $ApiUserAgent = "loganator956/handy-scripts"
 $SourceList = Invoke-WebRequest -Uri $args[0] | ConvertFrom-Json
 $SourceList[0].MinecraftProfile[0].gameDir = $SourceList[0].MinecraftProfile[0].gameDir.Replace("//REPLACEWITHDOCS", [Environment]::GetFolderPath("MyDocuments"))
 $DestinationStorage = $SourceList[0].MinecraftProfile[0].gameDir
-if ((Test-Path -Path $MCProfile.gameDir) -eq $false) {
-    New-Item -Path $MCProfile.gameDir -ItemType Directory
+if ((Test-Path -Path $DestinationStorage) -eq $false) {
+    New-Item -Path $DestinationStorage -ItemType Directory
 }
 if ((Test-Path -Path "$DestinationStorage\mods") -eq $false) {
     New-Item -Path "$DestinationStorage\mods" -ItemType Directory
