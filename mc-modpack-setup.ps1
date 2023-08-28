@@ -34,7 +34,7 @@ function Install-ModrinthVersion {
             Write-Warning -Message ($Dependency.project_id + " has no version_id set. Manually add this dependency to the json file")
             continue
         }
-        Install-ModrinthVersion -VersionID $Dependency.version_id
+        Install-ModrinthVersion -VersionID $Dependency.version_id -Blacklist $Blacklist
     }
 }
 
