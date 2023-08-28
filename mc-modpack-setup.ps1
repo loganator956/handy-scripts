@@ -24,6 +24,11 @@ function Install-ModrinthVersion {
 
     # Process Dependencies
     foreach ($Dependency in $content.dependencies) {
+        Write-Host "Installing modrinth dependency" $Dependency
+        if ($Dependency.version_id -eq $null) {
+            Write-Warning -Message ($Dependency.project_id + " has no version_id set. Manually add this dependency to the json file")
+            continue
+        }
         Install-ModrinthVersion -VersionID $Dependency.version_id
     }
 }
