@@ -143,10 +143,10 @@ Install-ModLoader -URL $SourceList.ModLoader $SourceList.ModLoaderInstallArgs
 Disable-Mods -ModDir "$DestinationStorage\mods"
 
 foreach ($source in $SourceList.Mods) {
-    if ($Source.Source -eq "modrinth") {
-        Install-ModrinthVersion -VersionID $Source.VersionID
+    if ($source.Source -eq "modrinth") {
+        Install-ModrinthVersion -VersionID $source.VersionID
     }
-    elseif ($Source.Source -eq "curseforge") {
+    elseif ($source.Source -eq "curseforge") {
         Install-Curseforge -url $source.URL
     }
 }
