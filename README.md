@@ -4,6 +4,8 @@ This is a small powershell script that will automatically setup custom unofficia
 
 ## Usage
 
+This is just a normal powershell script. As it is unsigned you will need to change your `ExecutionPolicy` to at least `RemoteSigned`. 
+
 ```Powershell
 mc-modpack-setup.ps1 [url to json file]
 ```
