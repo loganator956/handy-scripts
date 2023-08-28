@@ -2,10 +2,9 @@ function Install-ModrinthVersion {
     param (
         $VersionID
     )
-    
+
     Write-Host "Installing modrinth" $VersionID
     
-    try {
     $response = Invoke-WebRequest -Uri https://api.modrinth.com/v2/version/$VersionID -Headers @{"User-Agent" = $ApiUserAgent } -Method Get
     $content = $response.Content | ConvertFrom-Json
     # Get file
