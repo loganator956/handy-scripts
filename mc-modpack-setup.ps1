@@ -11,8 +11,7 @@ function Install-ModrinthVersion {
         Write-Host "Already installed "$content.project_id
         return
     }
-    if ($Blacklist.Contains($content.project_id))
-    {
+    if ($Blacklist.Contains($content.project_id)) {
         Write-Host "Ignoring "$content.project_id
     }
     $project = Get-Project -ProjectID $content.project_id
@@ -27,7 +26,7 @@ function Install-ModrinthVersion {
 
     # Process Dependencies
     foreach ($Dependency in $content.dependencies) {
-        Install-ModrinthVersion -VersionID $Dependency.version_id
+        Install-ModrinthVersion -VersionID $Dependency.version_id -Blacklist $Blacklist
     }
 }
 
