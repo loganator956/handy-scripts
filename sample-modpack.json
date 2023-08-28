@@ -30,6 +30,14 @@
         ],
         "ModBlacklist": [
             "P7dR8mSH"
+        ],
+        "Shaders": [
+            {
+                "Label": "Complementary Shaders v4",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/shader/complementary-shaders-v4/version/v4.7.2",
+                "VersionID": "G16NNnV9"
+            }
         ]
     }
 ]
