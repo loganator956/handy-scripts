@@ -1,6 +1,7 @@
 function Install-ModrinthVersion {
     param (
-        $VersionID
+        $VersionID,
+        $Blacklist
     )
     
     $response = Invoke-WebRequest -Uri https://api.modrinth.com/v2/version/$VersionID -Headers @{"User-Agent" = $ApiUserAgent } -Method Get
@@ -9,6 +10,10 @@ function Install-ModrinthVersion {
     if ($InstalledModrinthProjectsList.Contains($content.project_id)) {
         Write-Host "Already installed "$content.project_id
         return
+    }
+    if ($Blacklist.Contains($content.project_id))
+    {
+        Write-Host "Ignoring "$content.project_id
     }
     $project = Get-Project -ProjectID $content.project_id
     $InstalledModrinthProjectsList.Add($content.project_id)
