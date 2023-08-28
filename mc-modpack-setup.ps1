@@ -3,6 +3,9 @@ function Install-ModrinthVersion {
         $VersionID
     )
     
+    Write-Host "Installing modrinth" $VersionID
+    
+    try {
     $response = Invoke-WebRequest -Uri https://api.modrinth.com/v2/version/$VersionID -Headers @{"User-Agent" = $ApiUserAgent } -Method Get
     $content = $response.Content | ConvertFrom-Json
     # Get file
@@ -30,6 +33,7 @@ function Install-Curseforge {
     param (
         $url
     )
+    Write-Host "Installing curseforge" $url
     
     $fileName = Split-Path $url -Leaf
     if ((Test-Path -Path "$DestinationStorage\mods") -eq $false) {
