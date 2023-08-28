@@ -16,6 +16,54 @@
         ],
         "Mods": [
             {
+                "Label": "Sodium Extra",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/sodium-extra/version/mc1.20.1-0.5.1",
+                "VersionID": "80a0J5Cn"
+            },
+            {
+                "Label": "Mod Menu",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/modmenu/version/7.2.1",
+                "VersionID": "eTCL1uh8"
+            },
+            {
+                "Label": "bad packets",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/badpackets/version/fabric-0.4.1",
+                "VersionID": "ivJ0srK8"
+            },
+            {
+                "Label":"EMI",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/emi/version/1.0.19+1.20.1+fabric",
+                "VersionID": "K2ePWegL"
+            },
+            {
+                "Label":"Architectury",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/architectury-api/version/9.1.12+fabric",
+                "VersionID": "Sbew3kXe"
+            },
+            {
+                "Label": "Fabric API",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/fabric-api/version/0.87.0+1.20.1",
+                "VersionID": "lcnQpW9C"
+            },
+            {
+                "Label": "Cloth Config API",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/cloth-config/version/11.1.106+fabric",
+                "VersionID": "s7VTKfLA"
+            },
+            {
+                "Label": "Quilted Fabric API (QFAPI) / Quilt Standard Libraries (QSL)",
+                "Source": "modrinth",
+                "URL": "https://modrinth.com/mod/qsl/version/7.1.2+0.87.0-1.20.1",
+                "VersionID": "aWl2Qw6u"
+            },
+            {
                 "Label": "Numeral Ping",
                 "VersionID": "W2er4vCn",
                 "Source": "modrinth",
@@ -78,12 +126,6 @@
                 "Source": "modrinth",
                 "URL": "https://modrinth.com/mod/lambdabettergrass/version/1.5.2+1.20.1",
                 "VersionID": "Fhyj2P7Q"
-            },
-            {
-                "Label": "Mod Menu",
-                "Source": "modrinth",
-                "URL": "https://modrinth.com/mod/modmenu/version/7.2.1",
-                "VersionID": "eTCL1uh8"
             },
             {
                 "Label": "Roughly Enough Items",
