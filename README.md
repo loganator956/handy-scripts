@@ -10,6 +10,12 @@ This is just a normal powershell script. As it is unsigned you will need to chan
 mc-modpack-setup.ps1 [url to json file]
 ```
 
+Or you can run it using `Invoke-Expression`:
+
+```Powershell
+
+```
+
 Currently, it will download the file using `Invoke-WebRequest` and so will not be able to install from local files. 
 
 ## Modpack Json

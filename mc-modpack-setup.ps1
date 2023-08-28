@@ -138,6 +138,12 @@ if ($r -ne "y") {
 }
 
 $ApiUserAgent = "loganator956/handy-scripts"
+
+$jsonPath = $args[0]
+if ($jsonPath -eq $null){
+    $jsonPath = Read-Host -Prompt "JsonPath not provided, please enter a URL"
+}
+
 $SourceList = Invoke-WebRequest -Uri $args[0] | ConvertFrom-Json
 $SourceList[0].MinecraftProfile[0].gameDir = $SourceList[0].MinecraftProfile[0].gameDir.Replace("//REPLACEWITHDOCS", [Environment]::GetFolderPath("MyDocuments"))
 $DestinationStorage = $SourceList[0].MinecraftProfile[0].gameDir
