@@ -1,6 +1,7 @@
 function Install-ModrinthVersion {
     param (
-        $VersionID
+        $VersionID,
+        $Blacklist
     )
     
     $response = Invoke-WebRequest -Uri https://api.modrinth.com/v2/version/$VersionID -Headers @{"User-Agent" = $ApiUserAgent } -Method Get
@@ -8,6 +9,10 @@ function Install-ModrinthVersion {
     # Get file
     if ($InstalledModrinthProjectsList.Contains($content.project_id)) {
         Write-Host "Already installed "$content.project_id
+        return
+    }
+    if ($Blacklist.Contains($content.project_id)) {
+        Write-Host "Ignoring "$content.project_id
         return
     }
     $project = Get-Project -ProjectID $content.project_id
@@ -22,7 +27,7 @@ function Install-ModrinthVersion {
 
     # Process Dependencies
     foreach ($Dependency in $content.dependencies) {
-        Install-ModrinthVersion -VersionID $Dependency.version_id
+        Install-ModrinthVersion -VersionID $Dependency.version_id -Blacklist $Blacklist
     }
 }
 
@@ -144,7 +149,7 @@ Disable-Mods -ModDir "$DestinationStorage\mods"
 
 foreach ($source in $SourceList.Mods) {
     if ($Source.Source -eq "modrinth") {
-        Install-ModrinthVersion -VersionID $Source.VersionID
+        Install-ModrinthVersion -VersionID $Source.VersionID -Blacklist $SourceList.ModBlacklist
     }
     elseif ($Source.Source -eq "curseforge") {
         Install-Curseforge -url $source.URL
