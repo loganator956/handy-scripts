@@ -10,7 +10,7 @@
             "request": "launch",
             "script": "${file}",
             "args": [
-                "https://raw.githubusercontent.com/loganator956/mc-autosetup/master/mc-vanilla%2B.json"
+                "https://raw.githubusercontent.com/loganator956/mc-autosetup/master/sample-modpack.json"
             ]
         }
     ]
