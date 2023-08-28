@@ -13,6 +13,7 @@ function Install-ModrinthVersion {
     }
     if ($Blacklist.Contains($content.project_id)) {
         Write-Host "Ignoring "$content.project_id
+        return
     }
     $project = Get-Project -ProjectID $content.project_id
     $InstalledModrinthProjectsList.Add($content.project_id)
