@@ -1,6 +1,7 @@
 function Install-ModrinthVersion {
     param (
-        $VersionID
+        $VersionID,
+        $Blacklist
     )
 
     Write-Host "Installing modrinth" $VersionID
@@ -10,6 +11,10 @@ function Install-ModrinthVersion {
     # Get file
     if ($InstalledModrinthProjectsList.Contains($content.project_id)) {
         Write-Host "Already installed "$content.project_id
+        return
+    }
+    if ($Blacklist.Contains($content.project_id)) {
+        Write-Host "Ignoring "$content.project_id
         return
     }
     $project = Get-Project -ProjectID $content.project_id
@@ -152,7 +157,7 @@ Disable-Mods -ModDir "$DestinationStorage\mods"
 
 foreach ($source in $SourceList.Mods) {
     if ($source.Source -eq "modrinth") {
-        Install-ModrinthVersion -VersionID $source.VersionID
+        Install-ModrinthVersion -VersionID $source.VersionID -Blacklist $SourceList.ModBlacklist
     }
     elseif ($source.Source -eq "curseforge") {
         Install-Curseforge -url $source.URL
