@@ -102,14 +102,14 @@ function Create-LauncherProfile {
     # $MCProfile.gameDir = $MCProfile.gameDir.Replace("//REPLACEWITHDOCS", [Environment]::GetFolderPath("MyDocuments"))
 
     if ($found -eq $true) {
-        $profile = $profiles.$ID
-        $profile.name = $MCProfile.name
-        $profile.type = $MCProfile.type
-        $profile.created = $MCProfile.created
-        $profile.lastUsed = $MCProfile.lastUsed
-        $profile.icon = $MCProfile.icon
-        $profile.lastVersionId = $MCProfile.lastVersionId
-        $profile.gameDir = $MCProfile.gameDir
+        $prof = $profiles.$ID
+        $prof.name = $MCProfile.name
+        $prof.type = $MCProfile.type
+        $prof.created = $MCProfile.created
+        $prof.lastUsed = $MCProfile.lastUsed
+        $prof.icon = $MCProfile.icon
+        $prof.lastVersionId = $MCProfile.lastVersionId
+        $prof.gameDir = $MCProfile.gameDir
     }
     else {
         $profiles | Add-Member -MemberType NoteProperty -Name $ID -Value $MCProfile
