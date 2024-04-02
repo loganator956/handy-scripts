@@ -17,6 +17,10 @@ function Install-ModrinthVersion {
         Write-Host "Ignoring "$content.project_id
         return
     }
+    if ($Blacklist.Contains($VersionID)){
+        Write-Host "Ignoring version "$VersionID
+        return
+    }
     $project = Get-Project -ProjectID $content.project_id
     $InstalledModrinthProjectsList.Add($content.project_id)
     $title = $project.title
@@ -36,6 +40,42 @@ function Install-ModrinthVersion {
         }
         Install-ModrinthVersion -VersionID $Dependency.version_id -Blacklist $Blacklist
     }
+}
+
+function Find-ModrinthVersion {
+    param (
+        $ProjectID,
+        $AllowedLoaders,
+        $AllowedGameVersions
+    )
+
+    $response = Invoke-WebRequest -Uri https://api.modrinth.com/v2/project/$ProjectID/version -Headers @{"User-Agent" = $ApiUserAgent } -Method Get
+    $content = $response.Content | ConvertFrom-Json
+    
+    $validVersions = @()
+
+    foreach ($version in $content) {
+        $gvs = $version.game_versions
+        $validated = $false
+        foreach ($gv in $gvs) {
+            if ($validated -eq $false) {
+                if ($AllowedGameVersions.Contains($gv)) {
+                    # valid game version, check launcher now
+                    $loaders = $version.loaders
+                    foreach ($loader in $loaders) {
+                        if ($validated -eq $false) {
+                            if ($AllowedLoaders.Contains($loader)) {
+                                $validVersions += $version
+                                $validated = $true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    # then go through the blacklisted versions and check if they bad, or dot his in the otherdownload function
+    Write-Host "Tit"
 }
 
 function Install-ModrinthShader {
@@ -157,6 +197,7 @@ function Create-LauncherProfile {
     $s | Set-Content -Path $ProfFile
 }
 
+
 $jsonPath = $args[0]
 if ($jsonPath -eq $null) {
     $jsonPath = $MC_JSON_PATH
@@ -172,7 +213,7 @@ if ($r -ne "y") {
 
 $ApiUserAgent = "loganator956/handy-scripts"
 
-
+Find-ModrinthVersion -ProjectID "8shC1gFX" -AllowedLoaders @("fabric", "quilt") -AllowedGameVersions @("1.20.1", "1.20.2")
 
 $SourceList = Invoke-WebRequest -Uri $jsonPath | ConvertFrom-Json
 $SourceList[0].MinecraftProfile[0].gameDir = $SourceList[0].MinecraftProfile[0].gameDir.Replace("//REPLACEWITHDOCS", [Environment]::GetFolderPath("MyDocuments"))
@@ -203,7 +244,7 @@ foreach ($source in $SourceList.Mods) {
     }
 }
 
-foreach ($shader in $SourceList.Shaders){
+foreach ($shader in $SourceList.Shaders) {
     if ($shader.Source -eq "modrinth") {
         Install-ModrinthShader -VersionID $shader.VersionID
     }
