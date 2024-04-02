@@ -1,7 +1,9 @@
 function Install-ModrinthVersion {
     param (
         $VersionID,
-        $Blacklist
+        $Blacklist,
+        $AllowedLoaders,
+        $AllowedGameVersions
     )
 
     Write-Host "Installing modrinth" $VersionID
@@ -35,10 +37,11 @@ function Install-ModrinthVersion {
     foreach ($Dependency in $content.dependencies) {
         Write-Host "Installing modrinth dependency" $Dependency
         if ($Dependency.version_id -eq $null) {
-            Write-Warning -Message ($Dependency.project_id + " has no version_id set. Manually add this dependency to the json file")
+            Write-Warning -Message ($Dependency.project_id + " has no version_id set. Finding...")
+            Find-ModrinthVersion -ProjectID $Dependency.project_id -AllowedLoaders $AllowedLoaders -AllowedGameVersions $AllowedGameVersions -Blacklist $Blacklist
             continue
         }
-        Install-ModrinthVersion -VersionID $Dependency.version_id -Blacklist $Blacklist
+        Install-ModrinthVersion -VersionID $Dependency.version_id -Blacklist $Blacklist -AllowedLoaders $AllowedLoaders -AllowedGameVersions $AllowedGameVersions
     }
 }
 
@@ -78,7 +81,7 @@ function Find-ModrinthVersion {
     # then go through the blacklisted versions and check if they bad, or dot his in the otherdownload function
     foreach ($validversion in $validVersions) {
         if ($Blacklist.Contains($validversion.id) -eq $false) {
-            Install-ModrinthVersion -VersionID $validversion.id -Blacklist $Blacklist
+            Install-ModrinthVersion -VersionID $validversion.id -Blacklist $Blacklist -AllowedLoaders $AllowedLoaders -AllowedGameVersions $AllowedGameVersions
             return
         }
     }
@@ -247,7 +250,7 @@ foreach ($source in $SourceList.Mods) {
             Find-ModrinthVersion -ProjectID $source.ProjectID -Blacklist $SourceList.ModBlacklist -AllowedGameVersions $SourceList[0].AllowedGameVersions -AllowedLoaders $SourceList[0].AllowedModLoaders
         }
         else {
-            Install-ModrinthVersion -VersionID $source.VersionID -Blacklist $SourceList.ModBlacklist
+            Install-ModrinthVersion -VersionID $source.VersionID -Blacklist $SourceList.ModBlacklist -AllowedGameVersions $SourceList[0].AllowedGameVersions -AllowedLoaders $SourceList[0].AllowedModLoaders
         }
     }
     elseif ($source.Source -eq "curseforge") {
