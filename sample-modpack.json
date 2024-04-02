@@ -1,9 +1,9 @@
 [
     {
-        "Name": "sample auto modpack",
+        "Name": "sample modpack",
         "ModLoader": "https://maven.quiltmc.org/repository/release/org/quiltmc/quilt-installer/0.8.2/quilt-installer-0.8.2.jar",
         "ModLoaderInstallArgs": "install client 1.20.1 0.20.1",
-        "ProfileUUID": "sample-auto-modpack",
+        "ProfileUUID": "sample-modpack",
         "AllowedGameVersions": [
             "1.20.1"
         ],
@@ -13,13 +13,13 @@
         ],
         "MinecraftProfile": [
             {
-                "name": "Quilt Vanilla+ 1.20.1",
+                "name": "Sample modpack 1.20.1",
                 "type": "custom",
                 "created": "2023-08-27T21:17:52.611Z",
                 "lastUsed": "2023-08-27T21:17:52.611Z",
                 "icon": "Furnace",
                 "lastVersionId": "quilt-loader-0.20.1-1.20.1",
-                "gameDir": "//REPLACEWITHDOCS\\My Games\\Minecraft\\qv+1.20.1"
+                "gameDir": "//REPLACEWITHDOCS\\My Games\\Minecraft\\sample modpack 1.20.1"
             }
         ],
         "Mods": [
