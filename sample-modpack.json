@@ -4,6 +4,14 @@
         "ModLoader": "https://maven.quiltmc.org/repository/release/org/quiltmc/quilt-installer/0.8.2/quilt-installer-0.8.2.jar",
         "ModLoaderInstallArgs": "install client 1.20.1 0.20.1",
         "ProfileUUID": "sample-auto-modpack",
+        "AllowedGameVersions": [
+            "1.20.1",
+            "1.20.2"
+        ],
+        "AllowedModLoaders": [
+            "quilt",
+            "fabric"
+        ],
         "MinecraftProfile": [
             {
                 "name": "Quilt Vanilla+ 1.20.1",
