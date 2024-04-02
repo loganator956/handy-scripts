@@ -17,7 +17,7 @@ function Install-ModrinthVersion {
         Write-Host "Ignoring "$content.project_id
         return
     }
-    if ($Blacklist.Contains($VersionID)){
+    if ($Blacklist.Contains($VersionID)) {
         Write-Host "Ignoring version "$VersionID
         return
     }
@@ -46,7 +46,8 @@ function Find-ModrinthVersion {
     param (
         $ProjectID,
         $AllowedLoaders,
-        $AllowedGameVersions
+        $AllowedGameVersions,
+        $Blacklist
     )
 
     $response = Invoke-WebRequest -Uri https://api.modrinth.com/v2/project/$ProjectID/version -Headers @{"User-Agent" = $ApiUserAgent } -Method Get
@@ -75,7 +76,12 @@ function Find-ModrinthVersion {
         }
     }
     # then go through the blacklisted versions and check if they bad, or dot his in the otherdownload function
-    Write-Host "Tit"
+    foreach ($validversion in $validVersions) {
+        if ($Blacklist.Contains($validversion.id) -eq $false) {
+            Install-ModrinthVersion -VersionID $validversion.id -Blacklist $Blacklist
+            return
+        }
+    }
 }
 
 function Install-ModrinthShader {
@@ -213,7 +219,7 @@ if ($r -ne "y") {
 
 $ApiUserAgent = "loganator956/handy-scripts"
 
-Find-ModrinthVersion -ProjectID "8shC1gFX" -AllowedLoaders @("fabric", "quilt") -AllowedGameVersions @("1.20.1", "1.20.2")
+#Find-ModrinthVersion -ProjectID "8shC1gFX" -AllowedLoaders @("fabric", "quilt") -AllowedGameVersions @("1.20.1", "1.20.2")
 
 $SourceList = Invoke-WebRequest -Uri $jsonPath | ConvertFrom-Json
 $SourceList[0].MinecraftProfile[0].gameDir = $SourceList[0].MinecraftProfile[0].gameDir.Replace("//REPLACEWITHDOCS", [Environment]::GetFolderPath("MyDocuments"))
@@ -231,13 +237,18 @@ $JavaPath = "C:\Program Files\Eclipse Adoptium\jre-20.0.1.9-hotspot\bin\java.exe
 
 $InstalledModrinthProjectsList = New-Object Collections.Generic.List[string]
 
-Install-ModLoader -URL $SourceList.ModLoader $SourceList.ModLoaderInstallArgs
+#Install-ModLoader -URL $SourceList.ModLoader $SourceList.ModLoaderInstallArgs
 
 Disable-Mods -ModDir "$DestinationStorage\mods"
 
 foreach ($source in $SourceList.Mods) {
     if ($source.Source -eq "modrinth") {
-        Install-ModrinthVersion -VersionID $source.VersionID -Blacklist $SourceList.ModBlacklist
+        if ($source.VersionID -eq $null) {
+            Find-ModrinthVersion -ProjectID $source.ProjectID -Blacklist $SourceList.ModBlacklist -AllowedGameVersions $SourceList[0].AllowedGameVersions -AllowedLoaders $SourceList[0].AllowedModLoaders
+        }
+        else {
+            Install-ModrinthVersion -VersionID $source.VersionID -Blacklist $SourceList.ModBlacklist
+        }
     }
     elseif ($source.Source -eq "curseforge") {
         Install-Curseforge -url $source.URL
