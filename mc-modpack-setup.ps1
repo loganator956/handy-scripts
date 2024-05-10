@@ -85,6 +85,8 @@ function Find-ModrinthVersion {
             return
         }
     }
+    Write-Error -Message "No valid version has been found :("
+    return
 }
 
 function Install-ModrinthShader {
