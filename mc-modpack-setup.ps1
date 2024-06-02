@@ -153,6 +153,7 @@ function Install-ModLoader {
 function Install-Java {
     if ((Test-Path -Path $JavaPath) -eq $false) {
         winget.exe install --exact --id EclipseAdoptium.Temurin.20.JRE --version 20.0.1.9
+        winget.exe install --exact --id EclipseADoptium.Temurin.21.JRE --version 21.0.2.13
     }
 }
 
