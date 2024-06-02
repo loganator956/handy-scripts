@@ -85,7 +85,7 @@ function Find-ModrinthVersion {
             return
         }
     }
-    Write-Error -Message "No valid version has been found :("
+    Write-Error -Message "No valid version has been found :( for project $ProjectID"
     return
 }
 
