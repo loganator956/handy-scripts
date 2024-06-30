@@ -267,3 +267,5 @@ foreach ($shader in $SourceList.Shaders) {
     }
 }
 Create-LauncherProfile -MCProfile $SourceList.MinecraftProfile[0] -ID $SourceList.ProfileUUID
+
+Write-Host "Done :)"
