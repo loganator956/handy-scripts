@@ -36,15 +36,17 @@ function Install-ModrinthVersion {
 
     # Process Dependencies
     foreach ($Dependency in $content.dependencies) {
-        Write-Host "Installing modrinth dependency" $Dependency
         if ($Dependency.dependency_type -eq "required") {
+            Write-Host "Installing modrinth dependency" $Dependency
+        
             if ($Dependency.version_id -eq $null) {
                 Write-Warning -Message ($Dependency.project_id + " has no version_id set. Finding...")
                 Find-ModrinthVersion -ProjectID $Dependency.project_id -AllowedLoaders $AllowedLoaders -AllowedGameVersions $AllowedGameVersions -Blacklist $Blacklist
                 continue
             }
+        
+            Install-ModrinthVersion -VersionID $Dependency.version_id -Blacklist $Blacklist -AllowedLoaders $AllowedLoaders -AllowedGameVersions $AllowedGameVersions
         }
-        Install-ModrinthVersion -VersionID $Dependency.version_id -Blacklist $Blacklist -AllowedLoaders $AllowedLoaders -AllowedGameVersions $AllowedGameVersions
     }
 }
 
